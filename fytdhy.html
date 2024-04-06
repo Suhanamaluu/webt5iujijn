@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Event Announcement</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        /* Basic styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #444;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px;
+            border: 1px solid #ddd;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Event styles */
+        .event {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+        }
+
+        .event h3 {
+            margin-top: 0;
+        }
+
+        .add-event-btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .add-event-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>College Event Announcement</h1>
+    </header>
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">College Events</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#events">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#calendar">Event Calendar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#signup" data-toggle="modal" data-target="#signupModal">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+                  <!-- Sign Up Modal -->
+                  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="signupModalLabel">Sign Up for Event Updates</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="college">College</label>
+                                            <input type="text" class="form-control" id="college" placeholder="Enter your college">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="branch">Branch</label>
+                                     </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="year">Year of Studying</label>
+                                            <input type="text" class="form-control" id="year" placeholder="Enter your year of studying">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">Sign Up</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    <section id="home">
+        <h2>Welcome to the College Event Announcement Website!</h2>
+        <p>Signup to post and view upcoming events.</p>
+    </section>
+    <section id="events">
+        <h2>Ongoing Events</h2>
+        <div id="ongoing-event-list"></div>
+        <h2>Upcoming Events</h2>
+        <div id="upcoming-event-list"></div>
+        <a href="#signup" class="add-event-btn">Add Event</a>
+    </section>
+    <footer>
+        <p>Visit our <a href="https://www.collegewebsite.com">college website</a> | Follow us on <a
+                href="https://www.instagram.com/college_instagram">Instagram</a></p>
+    </footer>
+    <script>
+        // Sample event data
+        const ongoingEvents = [{
+                name: "Ongoing Event 1",
+                date: "2024-04-01",
+                description: "Description of Ongoing Event 1",
+                image: "https://via.placeholder.com/150"
+            },
+            {
+                name: "Ongoing Event 2",
+                date: "2024-04-05",
+                description: "Description of Ongoing Event 2",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
+
+        const upcomingEvents = [{
+                name: "Upcoming Event 1",
+                date: "2024-04-10",
+                description: "Description of Upcoming Event 1",
+                image: "https://via.placeholder.com/150"
+            },
+            {
+                name: "Upcoming Event 2",
+                date: "2024-04-15",
+                description: "Description of Upcoming Event 2",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
+
+        // Display events
+        const ongoingEventList = document.getElementById('ongoing-event-list');
+        ongoingEvents.forEach(event => {
+            const eventDiv = createEventElement(event);
+            ongoingEventList.appendChild(eventDiv);
+        });
+
+        const upcomingEventList = document.getElementById('upcoming-event-list');
+        upcomingEvents.forEach(event => {
+            const eventDiv = createEventElement(event);
+            upcomingEventList.appendChild(eventDiv);
+        });
+
+        function createEventElement(event) {
+            const eventDiv = document.createElement('div');
+            eventDiv.classList.add('event');
+            eventDiv.innerHTML = `
+                <h3>${event.name}</h3>
+                <p><strong>Date:</strong> ${event.date}</p>
+                <p>${event.description}</p>
+                <img src="${event.image}" alt="${event.name}">
+            `;
+            return eventDiv;
+        }
+    </script>
+</body>
+
+</html>
